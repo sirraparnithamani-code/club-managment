@@ -1,0 +1,984 @@
+/* ==========================================================================
+   STUDENT CLUB MANAGEMENT SYSTEM (SCMS) - PROFILE PAGE
+   pages/profile.html
+
+   Design notes
+   ------------
+   - Every colour, radius, shadow and duration is taken from the tokens
+     declared in style.css, so this page inherits the SCMS palette rather
+     than introducing a new one.
+   - Layout rhythm matches the other inner pages exactly:
+     padding-top: header-height + 48px, padding-bottom: 80px
+     (32px / 48px on mobile), inside the shared .container.
+   - Cards reuse the same surface / border / radius treatment as the
+     Dashboard panels, so Profile reads as part of the same application.
+   ========================================================================== */
+
+/* --- Layout ---
+   Identical vertical rhythm to club.css, events.css and dashboard.css. */
+.profile-section {
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+/* ==========================================================================
+   PROFILE HEADER
+   ========================================================================== */
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-hero-identity {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+.profile-avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--accent-primary-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-avatar-initials {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+/* Shown only until a real name is stored, so no initials are ever invented. */
+.profile-avatar-fallback {
+  width: 40px;
+  height: 40px;
+  stroke: var(--text-muted);
+  stroke-width: 1.6;
+  fill: none;
+}
+
+.profile-avatar.has-initials .profile-avatar-fallback {
+  display: none;
+}
+
+.profile-hero-text {
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  overflow-wrap: anywhere;
+}
+
+.profile-email {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  overflow-wrap: anywhere;
+}
+
+.profile-email a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.profile-email a:hover {
+  text-decoration: underline;
+}
+
+.profile-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* --- Meta chips --- */
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background-color: var(--badge-cream-bg);
+  color: var(--badge-cream-text);
+  border: 1px solid var(--badge-cream-border);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.profile-chip svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.profile-hero-actions {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SHARED CARD / SECTION SHELL
+   ========================================================================== */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.profile-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+}
+
+.profile-grid .profile-card {
+  margin-bottom: 0;
+}
+
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.profile-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.profile-card-body {
+  padding: 24px;
+}
+
+/* ==========================================================================
+   PERSONAL INFORMATION
+   ========================================================================== */
+
+.profile-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+}
+
+.profile-field {
+  min-width: 0;
+}
+
+.profile-field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.profile-field-value {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Placeholder copy is visually distinct so it is never mistaken for data. */
+.profile-field-value.is-placeholder {
+  color: var(--text-muted);
+}
+
+.profile-field-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   ACCOUNT SETTINGS
+   ========================================================================== */
+
+.profile-setting-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.profile-setting:first-child {
+  padding-top: 0;
+}
+
+.profile-setting:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.profile-setting-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.profile-setting-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-primary-subtle);
+  color: var(--accent-primary);
+}
+
+.profile-setting-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+}
+
+.profile-setting-icon.is-danger {
+  background-color: rgba(160, 82, 82, 0.10);
+  color: var(--error);
+}
+
+.profile-setting-text {
+  min-width: 0;
+}
+
+.profile-setting-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.profile-setting-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.profile-setting-action {
+  flex-shrink: 0;
+}
+
+/* --- Notification preferences --- */
+.profile-prefs {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.profile-prefs.is-open {
+  display: flex;
+}
+
+.profile-pref {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.profile-pref input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+
+.profile-pref-text {
+  min-width: 0;
+}
+
+.profile-pref-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.profile-pref-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   MY CLUBS
+   ========================================================================== */
+
+.profile-club-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.profile-club-grid[hidden] {
+  display: none;
+}
+
+.profile-club-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: transform var(--duration-micro) var(--ease-natural),
+              box-shadow var(--duration-micro) var(--ease-natural),
+              border-color var(--duration-micro) var(--ease-natural);
+}
+
+.profile-club-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-hover);
+}
+
+.profile-club-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.profile-club-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.375rem;
+  line-height: 1;
+}
+
+/* Badge colours come from getCategoryBadgeStyle() in club-data.js. */
+.profile-club-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.profile-club-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.profile-club-meta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-club-meta svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.profile-club-card .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* ==========================================================================
+   MY EVENT REGISTRATIONS
+   ========================================================================== */
+
+.profile-event-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-event-list[hidden] {
+  display: none;
+}
+
+.profile-event-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.profile-event-row:first-child {
+  padding-top: 0;
+}
+
+.profile-event-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.profile-event-date {
+  flex-shrink: 0;
+  width: 60px;
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.profile-event-day {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.profile-event-month {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.profile-event-body {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.profile-event-club {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  overflow-wrap: anywhere;
+}
+
+.profile-event-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.profile-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.profile-event-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  min-width: 0;
+}
+
+.profile-event-meta-item svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.profile-event-cta {
+  flex-shrink: 0;
+}
+
+/* --- Status badge --- */
+.profile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.profile-status-upcoming {
+  background-color: var(--badge-sage-bg);
+  color: var(--badge-sage-text);
+  border-color: var(--badge-sage-border);
+}
+
+.profile-status-ongoing {
+  background-color: var(--badge-mauve-bg);
+  color: var(--badge-mauve-text);
+  border-color: var(--badge-mauve-border);
+}
+
+.profile-status-closed {
+  background-color: var(--badge-cream-bg);
+  color: var(--badge-cream-text);
+  border-color: var(--badge-cream-border);
+}
+
+/* ==========================================================================
+   EMPTY STATES
+   ========================================================================== */
+
+.profile-empty {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.profile-empty-icon {
+  width: 44px;
+  height: 44px;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  margin-bottom: 14px;
+}
+
+.profile-empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.profile-empty-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto 18px;
+}
+
+/* ==========================================================================
+   EDIT PROFILE MODAL
+   Mirrors the join-club modal in club-details.css (same tokens, same
+   transition behaviour) but is scoped to this page.
+   ========================================================================== */
+
+.profile-modal-overlay[hidden] {
+  display: none;
+}
+
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-overlay);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-component) var(--ease-natural),
+              visibility var(--duration-component) var(--ease-natural);
+}
+
+.profile-modal-overlay:not([hidden]) {
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-modal {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  max-width: 560px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95) translateY(8px);
+  transition: transform var(--duration-component) var(--ease-natural);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-modal-overlay:not([hidden]) .profile-modal {
+  transform: scale(1) translateY(0);
+}
+
+.profile-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.profile-modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profile-modal-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--duration-micro) var(--ease-natural),
+              color var(--duration-micro) var(--ease-natural);
+}
+
+.profile-modal-close:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.profile-modal-close svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.profile-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.profile-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 24px;
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.profile-modal-footer-note {
+  margin-right: auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+/* --- Form fields (tokens shared with auth.css) --- */
+.profile-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.profile-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.profile-field-group.is-full {
+  grid-column: 1 / -1;
+}
+
+.profile-form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.profile-form-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.profile-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  transition: border-color var(--duration-micro) var(--ease-natural),
+              box-shadow var(--duration-micro) var(--ease-natural);
+}
+
+.profile-input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.profile-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-primary-subtle);
+}
+
+/* Protected identifiers are never editable on this page. */
+.profile-input:disabled,
+.profile-input[readonly] {
+  background-color: var(--bg-card-hover);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.profile-field-error {
+  font-size: 0.75rem;
+  color: var(--error);
+  min-height: 1em;
+}
+
+.profile-input.is-invalid {
+  border-color: var(--error);
+}
+
+.profile-input.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(160, 82, 82, 0.16);
+}
+
+.profile-form-error {
+  grid-column: 1 / -1;
+  font-size: 0.8125rem;
+  color: var(--error);
+  padding: 10px 12px;
+  background-color: rgba(160, 82, 82, 0.08);
+  border: 1px solid rgba(160, 82, 82, 0.28);
+  border-radius: var(--radius-md);
+}
+
+.profile-form-error[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* Laptop: 1024px - 1439px */
+@media (max-width: 1439px) {
+  .profile-club-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablet: 768px - 1023px */
+@media (max-width: 1023px) {
+  .profile-section {
+    padding-top: calc(var(--header-height) + 32px);
+    padding-bottom: 48px;
+  }
+
+  .profile-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-hero {
+    gap: 24px;
+  }
+}
+
+/* Mobile: below 768px */
+@media (max-width: 767px) {
+  .profile-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .profile-hero-identity {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .profile-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .profile-avatar-initials {
+    font-size: 1.25rem;
+  }
+
+  .profile-avatar-fallback {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-name {
+    font-size: 1.375rem;
+  }
+
+  .profile-hero-actions,
+  .profile-hero-actions .btn {
+    width: 100%;
+  }
+
+  .profile-card-header,
+  .profile-card-body {
+    padding: 20px;
+  }
+
+  .profile-fields,
+  .profile-form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .profile-club-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-event-row {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .profile-event-body {
+    flex-basis: calc(100% - 74px);
+  }
+
+  .profile-event-cta,
+  .profile-event-cta .btn {
+    width: 100%;
+  }
+
+  .profile-setting {
+    flex-wrap: wrap;
+  }
+
+  .profile-setting-action,
+  .profile-setting-action .btn {
+    width: 100%;
+  }
+
+  .profile-modal-overlay {
+    padding: 16px;
+    align-items: flex-start;
+  }
+
+  .profile-modal {
+    max-height: calc(100vh - 32px);
+    margin-top: 8px;
+  }
+
+  .profile-modal-header,
+  .profile-modal-body {
+    padding: 20px;
+  }
+
+  .profile-modal-footer {
+    padding: 16px 20px;
+  }
+
+  .profile-modal-footer .btn {
+    flex-grow: 1;
+  }
+
+  .profile-modal-footer-note {
+    flex-basis: 100%;
+    max-width: none;
+    margin-right: 0;
+    order: 3;
+  }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+
+  .profile-hero,
+  .profile-club-card,
+  .profile-modal,
+  .profile-modal-overlay {
+    transition: none;
+  }
+
+  .profile-club-card:hover {
+    transform: none;
+  }
+}

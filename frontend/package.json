@@ -1,0 +1,11 @@
+{
+  "name": "student-club-management-system",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^8.3.1"
+  }
+}

@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordinator Dashboard | Student Club Management System (SCMS)</title>
+  <meta name="description" content="Club Coordinator portal: manage assigned club, events, members and announcements.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Admin Stylesheet (reused for coordinator portal) -->
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/coordinator.css?v=639274835967354637">
+</head>
+
+<body class="admin-body coordinator-theme">
+
+  <div class="admin-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" aria-label="Coordinator Navigation">
+      <a href="coordinator.html" class="admin-brand" aria-label="SCMS Coordinator Home">
+        <div class="brand-emblem" aria-hidden="true">SC</div>
+        <div class="admin-brand-text">
+          <span class="admin-brand-title">SCMS Coordinator</span>
+          <span class="admin-brand-sub">Club Management Portal</span>
+        </div>
+      </a>
+
+      <nav class="admin-nav" aria-label="Coordinator main navigation">
+        
+        <a href="coordinator.html" class="admin-nav-link is-active" data-nav="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+          </svg>
+          <span>Overview</span>
+        </a>
+
+        
+        <a href="coordinator-events.html" class="admin-nav-link" data-nav="events">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Events</span>
+        </a>
+        <a href="coordinator-members.html" class="admin-nav-link" data-nav="members">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Members</span>
+        </a>
+        <a href="coordinator-announcements.html" class="admin-nav-link" data-nav="announcements">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M12 2l9 3v10c0 5-3.5 8.3-8 9-4 .5-8 .5-8-1V5l8-3z"></path>
+            <path d="M12 2v6m0 6v1"></path>
+          </svg>
+          <span>Announcements</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="../index.html" target="_blank">View Student Portal</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <h1 class="admin-topbar-title" style="line-height:1.2;margin:0;padding:0;">Coordinator Dashboard</h1>
+        <div class="admin-topbar-actions">
+          <span id="coordinatorClubBadge" class="admin-nav-link-badge" style="display: none;"></span>
+          <div class="user-display" style="display: flex; align-items: center; gap: 12px;">
+            <div class="admin-avatar" id="coordinatorAvatar" aria-hidden="true"></div>
+            <span class="admin-topbar-sub" id="coordinatorName" style="font-weight: 500; color: var(--text-primary);"></span>
+            <button type="button" class="btn btn-secondary btn-sm" id="coordinatorLogoutBtn" aria-label="Log out">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="admin-content">
+        <div class="admin-panel">
+          <div class="admin-panel-header">
+            <h2 class="admin-panel-title" id="clubNameTitle">Loading...</h2>
+            <p class="admin-panel-sub">Manage your assigned club</p>
+          </div>
+          <div class="admin-panel-body">
+            <!-- Stats Grid -->
+            <section class="admin-stats" aria-label="Club overview statistics">
+              <article class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Total Members</span>
+                  <span class="admin-stat-value" id="statTotalMembers">0</span>
+                </div>
+              </article>
+
+              <article class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Upcoming Events</span>
+                  <span class="admin-stat-value" id="statUpcomingEvents">0</span>
+                </div>
+              </article>
+
+              <article class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 2l9 3v10c0 5-3.5 8.3-8 9-4 .5-8 .5-8-1V5l8-3z"></path>
+                    <path d="M12 2v6m0 6v1"></path>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Announcements</span>
+                  <span class="admin-stat-value" id="statAnnouncements">0</span>
+                </div>
+              </article>
+
+              <article class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="8" y1="13" x2="16" y2="13"></line>
+                    <line x1="8" y1="17" x2="16" y2="17"></line>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Pending Approvals</span>
+                  <span class="admin-stat-value" id="statPendingApprovals">0</span>
+                </div>
+              </article>
+            </section>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="admin-panel">
+          <div class="admin-panel-header">
+            <h3 class="admin-panel-title">Quick Actions</h3>
+          </div>
+          <div class="admin-panel-body is-flush">
+            <div class="admin-grid-3">
+              <a href="coordinator-events.html" class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <line x1="9" y1="14" x2="15" y2="14"></line>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Create Event</span>
+                  <span class="admin-stat-value" style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);">Schedule new</span>
+                </div>
+              </a>
+              <a href="coordinator-members.html" class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Manage Members</span>
+                  <span class="admin-stat-value" style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);">View all</span>
+                </div>
+              </a>
+              <a href="coordinator-announcements.html" class="admin-stat">
+                <div class="admin-stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 2l9 3v10c0 5-3.5 8.3-8 9-4 .5-8 .5-8-1V5l8-3z"></path>
+                    <path d="M12 2v6m0 6v1"></path>
+                    <line x1="8" y1="14" x2="16" y2="14"></line>
+                  </svg>
+                </div>
+                <div class="admin-stat-body">
+                  <span class="admin-stat-label">Post Announcement</span>
+                  <span class="admin-stat-value" style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);">New post</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="admin-panel">
+          <div class="admin-panel-header">
+            <h3 class="admin-panel-title">Upcoming Events</h3>
+            <div class="admin-panel-actions">
+              <a href="coordinator-events.html" class="btn btn-secondary btn-sm">View All</a>
+            </div>
+          </div>
+          <div class="admin-panel-body">
+            <div class="admin-table-wrap">
+              <table class="admin-table" id="upcomingEventsTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Event</th>
+                    <th scope="col">Date & Time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Registrations</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="upcomingEventsBody">
+                  <tr>
+                    <td colspan="6" class="admin-empty" style="text-align: center; padding: 32px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;">
+                        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                      <div class="admin-empty-title">No upcoming events</div>
+                      <div class="admin-empty-text">Create your first event to get started</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Announcements -->
+        <div class="admin-panel">
+          <div class="admin-panel-header">
+            <h3 class="admin-panel-title">Recent Announcements</h3>
+            <div class="admin-panel-actions">
+              <a href="coordinator-announcements.html" class="btn btn-secondary btn-sm">View All</a>
+            </div>
+          </div>
+          <div class="admin-panel-body">
+            <div class="admin-table-wrap">
+              <table class="admin-table" id="recentAnnouncementsTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="recentAnnouncementsBody">
+                  <tr>
+                    <td colspan="4" class="admin-empty" style="text-align: center; padding: 32px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;">
+                        <path d="M12 2l9 3v10c0 5-3.5 8.3-8 9-4 .5-8 .5-8-1V5l8-3z"></path>
+                        <path d="M12 2v6m0 6v1"></path>
+                      </svg>
+                      <div class="admin-empty-title">No announcements</div>
+                      <div class="admin-empty-text">Post your first announcement</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Coordinator Dashboard Module -->
+  <script type="module" src="../js/coordinator.js"></script>
+</body>
+
+</html><link rel="stylesheet" href="../css/coordinator.css?v=639274835967354637">
+
+
+
+
+
+
+
+
+
+
+
+
+

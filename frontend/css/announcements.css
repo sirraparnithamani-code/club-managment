@@ -1,0 +1,313 @@
+/* ==========================================================================
+   ANNOUNCEMENTS PAGE STYLES
+   ========================================================================== */
+
+/* Discovery Controls */
+.announcement-discovery {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.announcement-discovery-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.announcement-search-wrapper {
+  flex: 1;
+  min-width: 280px;
+}
+
+.announcement-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+
+.announcement-select-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.announcement-select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-micro) var(--ease-natural),
+              box-shadow var(--duration-micro) var(--ease-natural);
+}
+
+.announcement-select:hover {
+  border-color: var(--border-emphasis);
+}
+
+.announcement-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(125, 91, 144, 0.15);
+}
+
+.announcement-results-info {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.results-count {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+/* Announcements Sections */
+.announcements-section {
+  margin-bottom: 40px;
+}
+
+.announcements-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header .section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Announcements Grid */
+.announcements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+/* Announcement Card */
+.announcement-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: transform var(--duration-component) var(--ease-natural),
+              box-shadow var(--duration-component) var(--ease-natural),
+              border-color var(--duration-component) var(--ease-natural);
+}
+
+.announcement-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-emphasis);
+}
+
+.announcement-card.is-pinned {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-md);
+}
+
+.announcement-pin-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1rem;
+  z-index: 1;
+}
+
+.announcement-header {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.announcement-category-badge,
+.announcement-priority-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.announcement-priority-badge.ann-badge-normal {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.announcement-priority-badge.ann-badge-high {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-warning, #F59E0B);
+}
+
+.announcement-priority-badge.ann-badge-urgent {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--color-danger, #EF4444);
+}
+
+.announcement-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.announcement-body {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.announcement-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.announcement-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.announcement-meta-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  stroke: var(--text-muted);
+  stroke-width: 1.2;
+  opacity: 0.5;
+}
+
+.empty-state-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.empty-state-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0 0 20px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Clear Filters Button */
+#clearAnnouncementFiltersBtn {
+  margin-top: 8px;
+}
+
+/* Pinned Section Styling */
+#pinnedAnnouncementsSection {
+  background: linear-gradient(135deg, rgba(125, 91, 144, 0.05) 0%, rgba(125, 91, 144, 0.02) 100%);
+  border: 1px solid rgba(125, 91, 144, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+#pinnedAnnouncementsSection .announcement-card {
+  border-color: rgba(125, 91, 144, 0.25);
+}
+
+#pinnedAnnouncementsSection .announcement-card:hover {
+  border-color: var(--color-accent);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .announcement-discovery {
+    padding: 16px;
+  }
+
+  .announcement-discovery-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .announcement-select-group {
+    width: 100%;
+  }
+
+  .announcements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .announcement-card {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .announcement-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .announcement-header {
+    gap: 8px;
+  }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .announcement-card,
+  .announcement-select {
+    transition: none;
+  }
+
+  .announcement-card:hover {
+    transform: none;
+  }
+}

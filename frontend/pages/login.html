@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Student Club Management System (SCMS)</title>
+  <meta name="description"
+    content="Sign in to your Student Club Management System account. Choose your portal: Student, Club Coordinator, or Admin.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core System Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Auth Specific Stylesheet -->
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body class="auth-body">
+
+  <!-- ==========================================================================
+       SUBTLE BACKGROUND COMPOSITION
+       Aesthetic: Deep dark tone, faint atmospheric accents, non-distracting
+       ========================================================================== -->
+  <div class="auth-bg-visual" aria-hidden="true">
+    <div class="auth-bg-glow-1"></div>
+    <div class="auth-bg-glow-2"></div>
+    <div class="auth-bg-grid"></div>
+  </div>
+
+<!-- ==========================================================================
+        CENTERED AUTHENTICATION CONTAINER
+        ========================================================================== -->
+  <div class="auth-container">
+
+    <!-- SCMS Branding Element -->
+    <header class="auth-brand-wrapper anim-step anim-brand">
+      <a href="../index.html" class="site-brand auth-brand" aria-label="Student Club Management System Home">
+        <div class="brand-emblem" aria-hidden="true">SC</div>
+        <div class="brand-details">
+          <span class="brand-title">SCMS</span>
+          <span class="brand-sub">Student Club Management System</span>
+        </div>
+      </a>
+    </header>
+
+    <!-- Authentication Card -->
+    <main class="auth-card anim-step anim-card" id="authCard">
+      <!-- Card Heading & Description -->
+      <div class="auth-header anim-step anim-heading">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle" id="authSubtitle">Sign in to continue to your student account.</p>
+      </div>
+
+      <!-- Portal Selector -->
+      <fieldset class="form-group anim-step anim-field-0" id="portalSelectorGroup">
+        <legend class="form-label">Select Portal</legend>
+        <div class="portal-options" role="radiogroup" aria-label="Choose your portal">
+          <label class="portal-option">
+            <input type="radio" name="portal" value="student" checked aria-describedby="portalStudentDesc">
+            <span class="portal-option-content">
+              <svg class="portal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <div class="portal-info">
+                <span class="portal-name">Student</span>
+                <span class="portal-desc" id="portalStudentDesc">Access your dashboard, clubs, events, and profile</span>
+              </div>
+            </span>
+            <span class="portal-radio-indicator" aria-hidden="true"></span>
+          </label>
+          <label class="portal-option">
+            <input type="radio" name="portal" value="coordinator" aria-describedby="portalCoordinatorDesc">
+            <span class="portal-option-content">
+              <svg class="portal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <div class="portal-info">
+                <span class="portal-name">Club Coordinator</span>
+                <span class="portal-desc" id="portalCoordinatorDesc">Manage your club's events, members, and announcements</span>
+              </div>
+            </span>
+            <span class="portal-radio-indicator" aria-hidden="true"></span>
+          </label>
+          <label class="portal-option">
+            <input type="radio" name="portal" value="admin" aria-describedby="portalAdminDesc">
+            <span class="portal-option-content">
+              <svg class="portal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <div class="portal-info">
+                <span class="portal-name">Admin</span>
+                <span class="portal-desc" id="portalAdminDesc">System administration console (separate verified access required)</span>
+              </div>
+            </span>
+            <span class="portal-radio-indicator" aria-hidden="true"></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Login Form (Frontend validated prototype for Spring Boot API) -->
+      <form id="loginForm" class="auth-form" novalidate>
+
+        <!-- Field: Club Selection (Coordinator only) -->
+        <div class="form-group anim-step anim-field-club" id="clubSelectorGroup" hidden>
+          <label for="clubSelect" class="form-label">Select Your Club</label>
+          <div class="input-wrapper" id="clubSelectWrapper">
+            <svg class="input-icon-lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+            </svg>
+            <select id="clubSelect" name="clubId" class="auth-input auth-select" required aria-required="true" aria-describedby="clubError">
+              <option value="">Choose your assigned club</option>
+            </select>
+          </div>
+          <div id="clubError" class="auth-error-msg" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Field: Email or Roll Number -->
+        <div class="form-group anim-step anim-field-1">
+          <label for="identifier" class="form-label">Email or Roll Number</label>
+          <div class="input-wrapper" id="identifierWrapper">
+            <svg class="input-icon-lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input type="text" id="identifier" name="identifier" class="auth-input"
+              placeholder="Enter your email or roll number" autocomplete="username" required aria-required="true"
+              aria-describedby="identifierError">
+          </div>
+          <div id="identifierError" class="auth-error-msg" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Field: Password -->
+        <div class="form-group anim-step anim-field-2">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-wrapper" id="passwordWrapper">
+            <svg class="input-icon-lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" id="password" name="password" class="auth-input" placeholder="Enter your password"
+              autocomplete="current-password" required aria-required="true" aria-describedby="passwordError">
+            <button type="button" class="password-toggle-btn" id="passwordToggle" aria-label="Show password"
+              aria-controls="password" aria-pressed="false">
+              <!-- Eye Icon (shown when password masked) -->
+              <svg class="password-toggle-icon icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <!-- Eye-Off Icon (shown when password unmasked) -->
+              <svg class="password-toggle-icon icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                </path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <div id="passwordError" class="auth-error-msg" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Row: Remember Me & Forgot Password -->
+        <div class="auth-options-row anim-step anim-field-3">
+          <label class="auth-checkbox-label" for="rememberMe">
+            <input type="checkbox" id="rememberMe" name="rememberMe" class="auth-checkbox">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="auth-link-forgot" id="forgotPasswordLink" data-stub-page="Password reset">Forgot password?</a>
+        </div>
+
+        <!-- Primary Sign In Button -->
+        <div class="anim-step anim-field-4">
+          <button type="submit" class="btn btn-primary btn-block auth-submit-btn" id="loginSubmitBtn">
+            <span>Sign In</span>
+          </button>
+        </div>
+
+        <!-- Prototype Feedback Banner (Neutral message, no fake authentication) -->
+        <div id="authStatusMessage" class="auth-status-banner" role="status" aria-live="polite" hidden></div>
+
+        <!-- Register Link Footer -->
+        <div class="auth-card-footer anim-step anim-field-5">
+          <span>Don't have an account?</span>
+          <a href="#" class="auth-link-register" data-stub-page="Student registration">Create an account</a>
+        </div>
+
+      </form>
+    </main>
+
+    <!-- Return to Home Link -->
+    <nav class="auth-back-wrapper anim-step anim-back" aria-label="Secondary navigation">
+      <a href="../index.html" class="auth-back-link" aria-label="Return to Student Club Management System Home page">
+        <svg class="back-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Home</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- Core System JavaScript (ES modules) -->
+  <script type="module" src="../js/script.js"></script>
+  <!-- Core Authentication Logic (Modular, API-Ready) -->
+  <script type="module" src="../js/auth.js"></script>
+</body>
+
+</html>

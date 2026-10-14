@@ -1,0 +1,334 @@
+/* ==========================================================================
+   STUDENT CLUB MANAGEMENT SYSTEM (SCMS) - EVENT DETAILS STYLESHEET
+   Page: pages/event-details.html
+   ========================================================================== */
+
+/* --- Layout --- */
+.event-details-section {
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+.event-details-section[hidden] {
+  display: none !important;
+}
+
+.event-details-section [hidden] {
+  display: none !important;
+}
+
+.event-details-section-block {
+  margin-bottom: 40px;
+}
+
+.event-details-section-block .section-title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+/* --- Breadcrumb --- */
+.breadcrumb {
+  margin-bottom: 24px;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '/';
+  color: var(--text-muted);
+}
+
+.breadcrumb-item a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-micro) var(--ease-natural);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--accent-primary);
+}
+
+.breadcrumb-item.current {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* --- Banner --- */
+.event-details-banner {
+  position: relative;
+  aspect-ratio: 21 / 8;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.event-details-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Title Block --- */
+.event-details-header {
+  margin-bottom: 40px;
+}
+
+.event-details-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  max-width: 820px;
+}
+
+.event-details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.event-details-actions .btn[hidden] {
+  display: none;
+}
+
+/* --- Description --- */
+.event-description p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 16px;
+  max-width: 760px;
+}
+
+.event-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Info Grid --- */
+.event-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.event-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-micro) var(--ease-natural);
+}
+
+.event-info-item:hover {
+  border-color: var(--border-hover);
+}
+
+.event-info-item .info-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.event-info-item .info-value {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* --- Registration Panel --- */
+.event-registration-panel {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+}
+
+.event-registration-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.event-registration-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.event-registration-row[hidden] {
+  display: none !important;
+}
+
+.event-registration-row .event-fact-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.event-registration-row .event-fact-value {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* --- Not Found --- */
+.not-found {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-content {
+  text-align: center;
+  padding: 48px;
+  max-width: 400px;
+}
+
+.not-found-icon {
+  width: 80px;
+  height: 80px;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  margin: 0 auto 24px auto;
+  opacity: 0.5;
+}
+
+.not-found h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.not-found p {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* --- Responsive --- */
+
+/* Laptop: 1024px - 1439px */
+@media (max-width: 1439px) {
+  .event-details-title {
+    font-size: 2rem;
+  }
+}
+
+/* Tablet: 768px - 1023px */
+@media (max-width: 1023px) {
+  .event-details-title {
+    font-size: 1.75rem;
+  }
+
+  .event-details-banner {
+    aspect-ratio: 16 / 7;
+  }
+
+  .event-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: below 768px */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .event-details-section {
+    padding-top: calc(var(--header-height) + 32px);
+    padding-bottom: 48px;
+  }
+
+  .event-details-title {
+    font-size: 1.5rem;
+  }
+
+  .event-details-banner {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+  }
+
+  .event-details-actions {
+    flex-direction: column;
+  }
+
+  .event-details-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .event-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-registration-panel {
+    padding: 20px;
+  }
+
+  .event-registration-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .event-registration-row .event-fact-value {
+    text-align: left;
+  }
+
+  .breadcrumb-list {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .event-info-item,
+  .breadcrumb-item a {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Coordinator Events | SCMS</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/admin.css">  <link rel="stylesheet" href="../css/coordinator.css?v=639275149138279579">
+</head><body class="admin-body coordinator-theme"><div class="admin-shell">  <aside class="admin-sidebar" aria-label="Coordinator Navigation">
+3:       <a href="coordinator.html" class="admin-brand" aria-label="SCMS Coordinator Home">
+4:         <div class="brand-emblem" aria-hidden="true">SC</div>
+5:         <div class="admin-brand-text">
+6:           <span class="admin-brand-title">SCMS Coordinator</span>
+7:           <span class="admin-brand-sub">Club Management Portal</span>
+8:         </div>
+9:       </a>
+10:       <nav class="admin-nav" aria-label="Coordinator main navigation">
+11:         
+12:         <a href="coordinator.html" class="admin-nav-link">Overview</a>
+13:         
+14:         <a href="coordinator-events.html" class="admin-nav-link is-active">Events</a>
+15:         <a href="coordinator-members.html" class="admin-nav-link">Members</a>
+16:         <a href="coordinator-announcements.html" class="admin-nav-link">Announcements</a>
+17:       </nav>
+18:       <div class="admin-sidebar-footer">
+19:         <a href="../index.html" target="_blank">View Student Portal</a>
+20:       </div>
+21:     </aside>
+22:     <main class="admin-main">
+23:       <header class="admin-topbar" style="min-height:70px;">
+24:         <div class="admin-topbar-inner">
+25:           <div class="admin-topbar-content" style="min-height:70px;padding-top:10px;padding-bottom:10px;">
+26:             <h1 class="admin-page-title">Club Events</h1>
+27:             <p class="admin-page-subtitle">Create, edit, publish and manage events for your assigned club.</p>
+28:           </div>
+29:           <div class="admin-topbar-actions">
+30:             <button class="btn btn-primary" id="newEventBtn">New Event</button>
+31:             <button class="btn btn-secondary" id="coordinatorLogoutBtn">Log out</button>
+32:           </div>
+33:         </div>
+34:       </header>
+35:       <div class="admin-content">
+36:         <div class="admin-panel" id="eventsListPanel">
+37:           <div class="admin-panel-header">
+38:             <h3 class="admin-panel-title">All Events</h3>
+39:             <div class="admin-panel-actions" style="display:flex;gap:10px;flex-wrap:wrap;">
+40:               <input type="search" id="eventsSearchInput" class="event-select" placeholder="Search events..." style="min-width:220px;">
+41:               <select id="eventsFilterSelect" class="event-select" style="min-width:160px;">
+42:                 <option value="all">All</option>
+43:                 <option value="draft">Drafts</option>
+44:                 <option value="published">Published</option>
+45:                 <option value="registration-open">Registration Open</option>
+46:                 <option value="ongoing">Ongoing</option>
+47:                 <option value="completed">Completed</option>
+48:                 <option value="cancelled">Cancelled</option>
+49:                 <option value="pending-approval">Pending Approval</option>
+50:               </select>
+51:             </div>
+52:           </div>
+53:           <div class="admin-panel-body is-flush">
+54:             <div class="admin-table-wrap">
+55:               <table class="admin-table">
+56:                 <thead>
+57:                   <tr>
+58:                     <th>Poster</th>
+59:                     <th>Event</th>
+60:                     <th>Date &amp; Time</th>
+61:                     <th>Venue</th>
+62:                     <th>Seats</th>
+63:                     <th>Status</th>
+64:                     <th class="admin-actions-col">Actions</th>
+65:                   </tr>
+66:                 </thead>
+67:                 <tbody id="eventsBody"></tbody>
+68:               </table>
+69:             </div>
+70:           </div>
+71:         </div>
+72:                 <div class="admin-panel" id="eventFormPanel" hidden>
+73:           <div class="admin-panel-header">
+74:             <h3 class="admin-panel-title" id="formTitle">Create an Event</h3>
+75:             <div class="admin-panel-actions" style="display:flex;gap:10px;flex-wrap:wrap;">
+76:               <button class="btn btn-secondary btn-sm" id="cancelFormBtn">Cancel</button>
+77:             </div>
+78:           </div>
+79:           <div class="admin-panel-body">
+80:             <form id="eventForm" novalidate>
+81:               <input type="hidden" id="eventId">
+82:               <div class="event-form-grid">
+83:                 <div class="left-col">
+84:                   <div class="card">
+85:                     <div class="card-header"><strong>Event Details</strong></div>
+86:                     <div class="card-body">
+87:                       <div class="form-group">
+88:                         <label for="eventTitle" class="form-label">Event Title *</label>
+89:                         <input type="text" id="eventTitle" class="form-input" required>
+90:                       </div>
+91:                       <div class="form-group">
+92:                         <label for="eventDescription" class="form-label">Description</label>
+93:                         <textarea id="eventDescription" class="form-textarea" rows="4"></textarea>
+94:                       </div>
+95:                       <div class="form-group">
+96:                         <label class="form-label">Category *</label>
+97:                         <div class="category-cards" id="categoryCards"></div>
+98:                         <input type="hidden" id="eventCategory">
+99:                       </div>
+100:                     </div>
+101:                   </div>
+102:                   <div class="card">
+103:                     <div class="card-header"><strong>Schedule &amp; Venue</strong></div>
+104:                     <div class="card-body">
+105:                       <div class="form-row">
+106:                         <div class="form-group">
+107:                           <label for="eventStartDate" class="form-label">Start Date *</label>
+108:                           <input type="date" id="eventStartDate" class="form-input" required>
+109:                         </div>
+110:                         <div class="form-group">
+111:                           <label for="eventStartTime" class="form-label">Start Time</label>
+112:                           <input type="time" id="eventStartTime" class="form-input">
+113:                         </div>
+114:                       </div>
+115:                       <div class="form-row">
+116:                         <div class="form-group">
+117:                           <label for="eventEndDate" class="form-label">End Date</label>
+118:                           <input type="date" id="eventEndDate" class="form-input">
+119:                         </div>
+120:                         <div class="form-group">
+121:                           <label for="eventEndTime" class="form-label">End Time</label>
+122:                           <input type="time" id="eventEndTime" class="form-input">
+123:                         </div>
+124:                       </div>
+125:                       <div class="form-group">
+126:                         <label for="eventVenue" class="form-label">Venue or Online Meeting Link</label>
+127:                         <input type="text" id="eventVenue" class="form-input">
+128:                       </div>
+129:                     </div>
+130:                   </div>
+131:                   <div class="card">
+132:                     <div class="card-header"><strong>Registration &amp; Eligibility</strong></div>
+133:                     <div class="card-body">
+134:                       <div class="form-row">
+135:                         <div class="form-group">
+136:                           <label for="eventRegistrationDeadline" class="form-label">Registration Deadline</label>
+137:                           <input type="date" id="eventRegistrationDeadline" class="form-input">
+138:                         </div>
+139:                         <div class="form-group">
+140:                           <label for="eventSeats" class="form-label">Participant Capacity (blank for unlimited)</label>
+141:                           <input type="number" id="eventSeats" class="form-input" min="0">
+142:                         </div>
+143:                       </div>
+144:                       <div class="form-group">
+145:                         <label for="eventEligibility" class="form-label">Eligibility / Event Instructions</label>
+146:                         <input type="text" id="eventEligibility" class="form-input">
+147:                       </div>
+148:                     </div>
+149:                   </div>
+150:                   <div class="card">
+151:                     <div class="card-header"><strong>Contact</strong></div>
+152:                     <div class="card-body">
+153:                       <div class="form-row">
+154:                         <div class="form-group">
+155:                           <label for="eventContactEmail" class="form-label">Contact Email</label>
+156:                           <input type="email" id="eventContactEmail" class="form-input">
+157:                         </div>
+158:                         <div class="form-group">
+159:                           <label for="eventContactPhone" class="form-label">Contact Phone</label>
+160:                           <input type="tel" id="eventContactPhone" class="form-input">
+161:                         </div>
+162:                       </div>
+163:                       <div class="form-group">
+164:                         <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="eventRegistrationEnabled"> Enable Registration</label>
+165:                       </div>
+166:                     </div>
+167:                   </div>
+168:                 </div>
+169:                 <div class="right-col">
+170:                   <div class="card">
+171:                     <div class="card-header"><strong>Event Poster</strong></div>
+172:                     <div class="card-body">
+173:                       <div class="poster-area" id="posterArea">
+174:                         <div class="poster-preview" id="posterPreview"></div>
+175:                         <div class="poster-placeholder" id="posterPlaceholder">No image</div>
+176:                       </div>
+177:                       <div class="form-group">
+178:                         <label for="eventBanner" class="form-label">Image URL (optional)</label>
+179:                         <input type="url" id="eventBanner" class="form-input" placeholder="https://...">
+180:                       </div>
+181:                     </div>
+182:                   </div>
+183:                   <div class="card">
+184:                     <div class="card-header"><strong>Live Event Summary</strong></div>
+185:                     <div class="card-body">
+186:                       <div class="summary-list">
+187:                         <div class="summary-item"><span>Title</span><span id="sumTitle">-</span></div>
+188:                         <div class="summary-item"><span>Date</span><span id="sumDate">-</span></div>
+189:                         <div class="summary-item"><span>Category</span><span id="sumCategory">-</span></div>
+190:                         <div class="summary-item"><span>Venue</span><span id="sumVenue">-</span></div>
+191:                       </div>
+192:                     </div>
+193:                   </div>
+194:                 </div>
+195:               </div>
+196:               <div class="action-bar">
+197:                 <button type="button" class="btn btn-secondary" id="cancelFormBtn2">Cancel</button>
+198:                 <button type="button" class="btn btn-secondary" id="saveDraftBtn">Save as Draft</button>
+199:                 <button type="button" class="btn btn-primary" id="publishBtn">Publish Event</button>
+200:                 <button type="submit" class="btn btn-primary" id="saveBtn" hidden>Save Changes</button>
+201:               </div>
+202:             </form>
+203:           </div>
+204:         </div>
+205:   <script type="module" src="../js/coordinator-events.js"></script>
+206: </body>
+207: </html>

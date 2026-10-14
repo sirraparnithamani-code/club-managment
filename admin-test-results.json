@@ -1,0 +1,64 @@
+{
+  "results": {
+    "statStudents": "34",
+    "statClubs": "24",
+    "statEvents": "51",
+    "statPending": "8",
+    "studentActivityChart": {
+      "hasContent": true,
+      "svgCount": 1
+    },
+    "clubActivityChart": {
+      "hasContent": true,
+      "svgCount": 1
+    },
+    "eventStatusChart": {
+      "hasContent": true,
+      "svgCount": 1
+    },
+    "recentEventsRowCount": 6,
+    "recentRegistrationsRowCount": 6,
+    "approvalsRowCount": 8,
+    "studentsTableRowCount": 34,
+    "clubsTableRowCount": 24,
+    "eventsTableRowCount": 51,
+    "announcementCount": "0 published",
+    "adminPendingBadge": "8",
+    "adminPendingBadgeHidden": false,
+    "dashboardViewActive": true,
+    "navLinks": [
+      {
+        "view": "dashboard",
+        "active": true
+      },
+      {
+        "view": "students",
+        "active": false
+      },
+      {
+        "view": "clubs",
+        "active": false
+      },
+      {
+        "view": "events",
+        "active": false
+      },
+      {
+        "view": "announcements",
+        "active": false
+      },
+      {
+        "view": "reports",
+        "active": false
+      },
+      {
+        "view": "settings",
+        "active": false
+      }
+    ]
+  },
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "warnings": []
+}
